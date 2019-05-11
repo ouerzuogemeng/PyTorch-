@@ -53,4 +53,6 @@ PyTorch入门
    PyTorch 张量、数学运算、自动求导模块、最优化模块和神经网络模块
       
       
-   
+4. PyTorch入门学习教程 & 构建一个简单的深度学习网络
+
+   详细代码和结果见：https://github.com/ouerzuogemeng/PyTorch-/blob/master/pytorch入门.ipynb

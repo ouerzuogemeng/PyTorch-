@@ -11,3 +11,5 @@ softmax解决多分类问题，转化之后多个类别概率之和为1。
 	即该方法是nn.LogSolfrmax()（激活函数）和nn.NLLLoss()（严格意义上的交叉熵函数）进行了结合
 
 也可以在训练model中直接加入softmax激活函数，可借鉴task2。
+
+1. hahha   sdd

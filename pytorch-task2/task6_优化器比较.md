@@ -4,7 +4,7 @@
 ## 常用的3种优化器
 * BGD
 * SGD
->> class torch.optim.SGD(params, lr= 0.01, momentum=0, dampening=0, weight_decay=0, nesterov=False)
+> class torch.optim.SGD(params, lr= 0.01, momentum=0, dampening=0, weight_decay=0, nesterov=False)
 * MBGD
 ### 其他优化算法
 * Momentum

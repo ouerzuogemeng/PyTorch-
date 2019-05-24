@@ -8,15 +8,17 @@
 * MBGD
 ### 其他优化算法
 * Momentum
+> 超参数
 * NAG
+> 超参数
 * Adagrad
-class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
+> class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
 * Adadelta 
-class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
+> class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
 * Rmsprop
-class torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e- 08, weight_decay=0, momentum=0, centered=False)
+> class torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e- 08, weight_decay=0, momentum=0, centered=False)
 * Adam
-class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0, amsgrad=False)
+> class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0, amsgrad=False)
 #### 1. BDG(Batch gradient descent):
 * 用整个训练集的数据来计算corss function的提督
    
@@ -152,5 +154,19 @@ Hinton 建议设定 γ 为 0.9, 学习率 η 为 0.001。
    
    
    
-其他昂发
-   整体来讲，Adam 是最好的选
+## 其他方法：
+* torch.optim.ASGD 随机平均梯度下降
+> class torch.optim.ASGD(params, lr=0.01, lambd=0.0001, alpha=0.75, t0=1000000. 0, weight_decay=0)
+* torch.optim.Rprop
+> class torch.optim.Rprop(params, lr=0.01, etas=(0.5, 1.2), step_sizes=(1e-06, 50))
+>> 该方法适合full_batch,不适用于mini_batch,因而很少见到。
+* torch.optim.Adamax
+> class torch.optim.Adamax(params, lr=0.002, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0)
+>> 该方法是对Adam增加了一个学习率上限的概念。
+* torch.optim.SparseAdam
+> class torch.optim.SparseAdam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08)
+>> 针对稀疏张量的一种“阉割版”Adam优化方法
+* torch.optim.LBFGS
+> class torch.optim.LBFGS(params, lr=1, max_iter=20, max_eval=None, tolerance_ grad=1e-05, tolerance_change=1e-09, history_size=100, line_search_fn=None)
+>> L-BFGS 属于拟牛顿算法。L-BFGS 是对 BFGS 的改进，特点就是节省内存。
+

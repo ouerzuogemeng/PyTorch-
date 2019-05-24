@@ -12,4 +12,3 @@ softmax解决多分类问题，转化之后多个类别概率之和为1。
 
 也可以在训练model中直接加入softmax激活函数，可借鉴task2。
 
-1. hahha   sdd

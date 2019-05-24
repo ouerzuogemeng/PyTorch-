@@ -34,7 +34,7 @@ PyTorch入门
    安装步骤：
    1）已安装anaconda
    
-   2）点击进入pytorch官网 https://pytorch.org
+   2）点击进入pytorch官网(https://pytorch.org)
    
       选择自己的系统、版本等信息，会生成对应的命令行代码。
       
@@ -55,4 +55,4 @@ PyTorch入门
       
 4. PyTorch入门学习教程 & 构建一个简单的深度学习网络
 
-   详细代码和结果见：https://github.com/ouerzuogemeng/PyTorch-/blob/master/pytorch入门.ipynb
+   入门代码(https://github.com/ouerzuogemeng/PyTorch-/blob/master/pytorch入门.ipynb)

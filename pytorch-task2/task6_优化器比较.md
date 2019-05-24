@@ -51,11 +51,17 @@
 优点：前两种方法的优化，既可以加快训练速度，又可以降低参数更新时的方差，使收敛更稳定
 
 缺点：1. 与learning_rate的大小有关。如果学习率过小，收敛速度会很慢；如果过大，则会在极小值处不停地震荡甚至偏离；
-     2. 
-
+     （有一种解决方案是先设置大一点的学习率，当两次迭代之间的变化低于某个阈值后，就减小学习率，但这个阈值要根据数据集的特点提前写好）
+   
+   2. 此方法是对所有参数更新时应用同样的学习率，如果我们想对一些特定的特征（如部分出现频率低的特征）进行大一点的更新，则难以做到
+   
+   3. 对于非凸函数，该方法容易被困在局部极小值，或者鞍点处。（鞍点周围的error都是一样的，所有维度的梯度都接近于0）
+   ![](./photo/andian)
+···
 	代码示例：
       for i in range(nb_epochs):
       	np.random.shuffle(data):
 	for batch in get_batches(data,batch_size=50):  #每次随机抽取50个样本计算梯度 n取值一般在50-256之间
 		params_grad = evaluate_gradient(loss_function, batch, params)
 		params = params - learning_rate * params_grad
+···

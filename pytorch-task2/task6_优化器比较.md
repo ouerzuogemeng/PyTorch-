@@ -42,7 +42,20 @@
 	代码示例：
       for i in range(nb_epochs):
       	np.random.shuffle(data):
-		for sample in data:
-			params_grad = evaluate_gradient(loss_function, sample, params)
-				params = params - learning_rate * params_grad
+	for sample in data:  #每次随机抽取一个样本计算梯度
+		params_grad = evaluate_gradient(loss_function, sample, params)
+		params = params - learning_rate * params_grad
 
+#### 3. MBGD(Mini-batch gradient descent):
+* 每次使用一个批次的样本进行梯度更新
+优点：前两种方法的优化，既可以加快训练速度，又可以降低参数更新时的方差，使收敛更稳定
+
+缺点：1. 与learning_rate的大小有关。如果学习率过小，收敛速度会很慢；如果过大，则会在极小值处不停地震荡甚至偏离；
+     2. 
+
+	代码示例：
+      for i in range(nb_epochs):
+      	np.random.shuffle(data):
+	for batch in get_batches(data,batch_size=50):  #每次随机抽取50个样本计算梯度 n取值一般在50-256之间
+		params_grad = evaluate_gradient(loss_function, batch, params)
+		params = params - learning_rate * params_grad

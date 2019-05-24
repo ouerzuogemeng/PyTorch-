@@ -4,7 +4,19 @@
 ## 常用的3种优化器
 * BGD
 * SGD
+class torch.optim.SGD(params, lr= 0.01, momentum=0, dampening=0, weight_decay=0, nesterov=False)
 * MBGD
+### 其他优化算法
+* Momentum
+* NAG
+* Adagrad
+class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
+* Adadelta 
+class torch.optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial _accumulator_value=0)
+* Rmsprop
+class torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e- 08, weight_decay=0, momentum=0, centered=False)
+* Adam
+class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0, amsgrad=False)
 #### 1. BDG(Batch gradient descent):
 * 用整个训练集的数据来计算corss function的提督
    
@@ -37,16 +49,16 @@
 缺点：1. 与learning_rate的大小有关。如果学习率过小，收敛速度会很慢；如果过大，则会在极小值处不停地震荡甚至偏离；
      （有一种解决方案是先设置大一点的学习率，当两次迭代之间的变化低于某个阈值后，就减小学习率，但这个阈值要根据数据集的特点提前写好）
 								
-	挑战1
+「挑战1」
 	
    2. 此方法是对所有参数更新时应用同样的学习率，如果我们想对一些特定的特征（如部分出现频率低的特征）进行大一点的更新，则难以做到
    
-  		挑战2
+「挑战2」
    
    3. 对于非凸函数，该方法容易被困在局部极小值，或者鞍点处。（鞍点周围的error都是一样的，所有维度的梯度都接近于0）
-   ![](./photo/saddle_point)
    
-   	挑战3
+「挑战3」
+   ![](./photo/saddle_point)
    
 	代码示例：
       for i in range(nb_epochs):
@@ -57,9 +69,8 @@
 
 ## 为了解决优化器存在的上述3点挑战，引入了下面几种算法：
 ### 针对挑战1:
-#### 1.1Momentum(动量)
+#### 1.1 Momentum(动量)
 [参考资料](https://www.cnblogs.com/jungel24/p/5682612.html)
-个人总结：
 
 在 ravines（即曲面的一个方向比另一个方向更陡） 的情况下，由于梯度方向一般朝着更陡的方向，SGD会发生震荡而迟迟不能接近极小值（学习率越大，震荡越严重）。
 在这种情况下，引入Monmentum来抑制震荡（即使得小球更倾向于往x方向行进--往前走，而不是上下摆动）
@@ -112,5 +123,34 @@
 该超参数一般设定为0.9
 
 #### 2.3 RMSprop
-RMSprop 和 Adadelta都是为了
+RMSprop 和 Adadelta都是为了解决Adagrad学习率急剧下降的问题。
 
+RMSprop是一种自适应学习率方法。
+
+公式跟Adadelta类似（学习率设置方式不同）
+
+Hinton 建议设定 γ 为 0.9, 学习率 η 为 0.001。
+
+#### Adam
+另一种计算每个参数的自适应学习率的方法
+
+即像Adadelta 和 RMSprop一样储存了过去梯度平方的指数衰减平均值，也像momentum一样保持了过去梯度的指数衰减平方值。
+
+超参数设定值: 
+
+建议 β1 ＝ 0.9，β2 ＝ 0.999，ϵ ＝ 10e−8
+
+实践表明，Adam 比其他适应性学习方法效果要好。
+
+## 如何选择优化器
+   很多论文里都会用SGD，没有momentum等，虽然能达到极小值，但是比其他算法用的时间长，而且可能会被困在鞍点。
+   
+   如果数据是稀疏的，就用自适应方法。即 Adagrad, Adadelta, RMSprop, Adam
+   * RMSprop, Adadelta, Adam 在很多情况下的效果是相似的。
+   * Adam 就是在 RMSprop 的基础上加了 bias-correction 和 momentum
+   整体来讲，Adam 是最好的选择。
+   
+   
+   
+其他昂发
+   整体来讲，Adam 是最好的选

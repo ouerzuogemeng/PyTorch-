@@ -151,6 +151,7 @@ Hinton 建议设定 γ 为 0.9, 学习率 η 为 0.001。
    如果数据是稀疏的，就用自适应方法。即 Adagrad, Adadelta, RMSprop, Adam
    * RMSprop, Adadelta, Adam 在很多情况下的效果是相似的。
    * Adam 就是在 RMSprop 的基础上加了 bias-correction 和 momentum
+   
    整体来讲，Adam 是最好的选择。
    
    

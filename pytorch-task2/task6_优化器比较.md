@@ -156,7 +156,7 @@ Hinton 建议设定 γ 为 0.9, 学习率 η 为 0.001。
    
    
    
-## 其他方法：
+## pytorch其他优化器：
 * torch.optim.ASGD 随机平均梯度下降
 > class torch.optim.ASGD(params, lr=0.01, lambd=0.0001, alpha=0.75, t0=1000000. 0, weight_decay=0)
 * torch.optim.Rprop

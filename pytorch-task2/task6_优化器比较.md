@@ -26,9 +26,9 @@
 	代码示例：
       for i in range(nb_epochs):
       	np.random.shuffle(data):
-	for sample in data:  #每次随机抽取一个样本计算梯度
-		params_grad = evaluate_gradient(loss_function, sample, params)
-		params = params - learning_rate * params_grad
+		for sample in data:  #每次随机抽取一个样本计算梯度
+			params_grad = evaluate_gradient(loss_function, sample, params)
+			params = params - learning_rate * params_grad
 
 #### 3. MBGD(Mini-batch gradient descent):
 * 每次使用一个批次的样本进行梯度更新
@@ -36,21 +36,28 @@
 
 缺点：1. 与learning_rate的大小有关。如果学习率过小，收敛速度会很慢；如果过大，则会在极小值处不停地震荡甚至偏离；
      （有一种解决方案是先设置大一点的学习率，当两次迭代之间的变化低于某个阈值后，就减小学习率，但这个阈值要根据数据集的特点提前写好）
-   
+								
+	挑战1
+	
    2. 此方法是对所有参数更新时应用同样的学习率，如果我们想对一些特定的特征（如部分出现频率低的特征）进行大一点的更新，则难以做到
+   
+  		挑战2
    
    3. 对于非凸函数，该方法容易被困在局部极小值，或者鞍点处。（鞍点周围的error都是一样的，所有维度的梯度都接近于0）
    ![](./photo/saddle_point)
    
+   	挑战3
+   
 	代码示例：
       for i in range(nb_epochs):
       	np.random.shuffle(data):
-	for batch in get_batches(data,batch_size=50):  #每次随机抽取50个样本计算梯度 n取值一般在50-256之间
-		params_grad = evaluate_gradient(loss_function, batch, params)
-		params = params - learning_rate * params_grad
+		for batch in get_batches(data,batch_size=50):  #每次随机抽取50个样本计算梯度 n取值一般在50-256之间
+			params_grad = evaluate_gradient(loss_function, batch, params)
+			params = params - learning_rate * params_grad
 
 ## 为了解决优化器存在的上述3点挑战，引入了下面几种算法：
-#### 1.Momentum(动量)
+### 针对挑战1:
+#### 1.1Momentum(动量)
 [参考资料](https://www.cnblogs.com/jungel24/p/5682612.html)
 个人总结：
 
@@ -61,6 +68,7 @@
 
 加入的这一项，可以使得梯度方向不变的维度上速度变快，梯度方向有所改变的维度上的更新速度变慢，这样就可以加快收敛并减小震荡。
 
+该超参数一般设定为0.9
 	θ=𝛾 * 𝜈t-1 +  𝜂* 𝛻θ* J(θ)
 	θ = θ - 𝜈t
 	(t,t-1,𝛻θ中θ为下标)
@@ -69,7 +77,7 @@
 
 为了解决这个问题，引入了Nesterov算法。
 
-#### 5.Nesterov accelerated gradient
+#### 1.2 Nesterov accelerated gradient
 
 	θ=𝛾 * 𝜈t-1 +  𝜂* 𝛻θ* J(θ-𝛾 * 𝜈t-1)
 	θ = θ - 𝜈t
@@ -78,4 +86,31 @@
 
 比较:
 * Momentum计算当前的梯度，然后在更新后的累积梯度后会有一个大的跳跃
-* NAG会先在
+* NAG会先在前一步的累积梯度上有一个较大的跳跃，然后衡量一下梯度做一下修正，这种预期的更新可以避免我们走的太快。
+
+通过以上方式，我们可以做到，在更新梯度时顺应loss function的梯度来调整速度，并且对SGD进行加速。
+
+该超参数一般设定为0.9
+
+### 针对挑战2---希望可以根据参数的重要性而对不同的参数进行不同程度的更新
+#### 2.1 Adagrad
+该算法可以对低频的参数做较大的更新，对高频的做较小的更新。
+
+参数𝜂一般取0.01
+
+* 优点：减少了学习率的手动调节
+
+因此，该算法对于稀疏的数据表现很好（需要在低频的特征上有较大的更新），提高了SGD的鲁棒性。
+
+* 缺点：分母会不断积累，学习率会收缩并最终会变得非常小(该算法将𝛻θ* J(θ)除以过去的梯度平方和)
+
+#### 2.2 Adadelta
+该算法是对Adagrad的改进。将分母换成了过去的梯度平方的衰减平均值，相当于梯度的平方根（RMS）。
+
+此外，还将学习率𝜂换成了RMS[∆θ]，我们甚至不需要提前设定学习率了。
+
+该超参数一般设定为0.9
+
+#### 2.3 RMSprop
+RMSprop 和 Adadelta都是为了
+

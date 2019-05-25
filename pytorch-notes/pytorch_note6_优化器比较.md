@@ -61,7 +61,7 @@
    
 「挑战3」
    
-   ![](./photo/saddle_point)
+   ![](./photo/saddle_point.jpeg)
    
 	代码示例：
       for i in range(nb_epochs):

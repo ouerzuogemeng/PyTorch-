@@ -13,5 +13,5 @@
 
 
 * 在jupter中运行好可视化代码之后，打开命令行输入 tensorboard --logdir=<../pytorch/runs> ,显示：
-> TensorBoard 1.13.1 at http://liuyangdeMacBook-Pro-2.local:6006 (Press CTRL+C to quit)
+> TensorBoard 1.13.1 at http://...local:6006 (Press CTRL+C to quit)   #注：具体地址略去
 >> 可以浏览器中贴入网址愉快滴玩耍啦。。

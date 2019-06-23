@@ -27,24 +27,24 @@
 
 #### Q5: 训练好的模型怎么保存及重新调用？
 > 只保留前10个模型。(就是每次训练后，计算 F1值，然后和之前最优的 F1 值进行比较，如果大于的话，就对该模型进行保存)
->>> #tensorflow设置模型储存前10
->>> sess = tf.Session()
->>> model_path = '' #保存的模型路径
->>> saver = tf.train.Saver(max_to_keep=10)
->>> saver.save(sess, model_path)
->>> # 模型的恢复用restore()函数
->>> saver.restore(sess, model_path)
->> #保存模型
->> ##仅保存权重HDF5文件
->> model.save_weights("model.h5") 
->> ##保存整个模型及结构
->> model.save('model_weight.h5')
+>>>   #tensorflow设置模型储存前10
+>>>   sess = tf.Session()
+>>>   model_path = '' #保存的模型路径
+>>>   saver = tf.train.Saver(max_to_keep=10)
+>>>   saver.save(sess, model_path)
+>>>   # 模型的恢复用restore()函数
+>>>   saver.restore(sess, model_path)
+>>  #保存模型
+>>  ##仅保存权重HDF5文件
+>>  model.save_weights("model.h5") 
+>>  ##保存整个模型及结构
+>>  model.save('model_weight.h5')
 
->> #加载模型#
->> ##载入权重
->> loaded_model.load_weights("model.h5") 
->> ##载入整个模型结构
->> model = load_model('model.h5') 
->> https://blog.csdn.net/sjtuxx_lee/article/details/80399514
+>>  #加载模型#
+>>  ##载入权重
+>>  loaded_model.load_weights("model.h5") 
+>>  ##载入整个模型结构
+>>  model = load_model('model.h5') 
+>>  https://blog.csdn.net/sjtuxx_lee/article/details/80399514
 
 > 这个问题，这个知乎回答的不错：不错：https://www.zhihu.com/question/58287577

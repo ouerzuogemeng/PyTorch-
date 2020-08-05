@@ -56,4 +56,4 @@ PyTorch入门
       
 4. PyTorch入门学习教程 & 构建一个简单的深度学习网络
 
-   详细代码和结果见：https://github.com/ouerzuogemeng/PyTorch-/blob/master/pytorch入门.ipynb
+   详细代码和结果见：https://github.com/ouerzuogemeng/PyTorch-/blob/master/pytorch-notes/pytorch_note1_入门.ipynb

@@ -11,4 +11,18 @@ softmax解决多分类问题，转化之后多个类别概率之和为1。
 
 故虽然未加入激活函数，但最终结果是不变的。
 
-如果需要加入softmax 激活函数，可借鉴task2。
+如果需要加入激活函数，可借鉴task2。
+
+
+正常逻辑回归写法：
+
+class LogisticRegression(nn.Module):
+    def __init__(self,input_size,num_classes):
+        super(LogisticRegression,self).__init__()
+        self.linear = nn.Linear(input_size,num_classes)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        out = self.linear(x)
+        out = self.sigmoid(out)
+        return out

@@ -19,7 +19,7 @@
 > class torch.optim.RMSprop(params, lr=0.01, alpha=0.99, eps=1e- 08, weight_decay=0, momentum=0, centered=False)
 * Adam
 > class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e- 08, weight_decay=0, amsgrad=False)
-#### 1. BDG(Batch gradient descent):
+#### 1. BGD(Batch gradient descent):
 * 用整个训练集的数据来计算corss function的提督
    
    缺点：1）该方法在每次更新中，对整个数据集计算梯度，数据量较大时会导致计算非常缓慢；
